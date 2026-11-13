@@ -1,4 +1,4 @@
-## To skill or not to skill
+## Skill Genie: to skill or not to skill
 
 Skills and plugins are how defined patterns of work accumulate. Before starting a
 task, spend a few seconds asking whether it should become one. This is a lens, not a
@@ -40,4 +40,4 @@ one line.
 A "no" at step 1 or 2 means: just do the task. State the verdict in one line
 ("skill candidate: step 5, new skill `x` in the public plugin") and carry on. Creating
 or publishing the skill follows the standing rules for shipping. Full checklist:
-skill `skill-or-not:skill-or-not`.
+skill `skill-genie:skill-or-not`.

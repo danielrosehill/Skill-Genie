@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install the "to skill or not to skill" heuristic into user-level agent instructions.
+"""Install the Skill Genie heuristic into user-level agent instructions.
 
     python3 -I install.py [--agent NAME ...] [--file PATH ...] [--remove] [--dry-run] [--force]
     python3 -I install.py --list
@@ -13,8 +13,10 @@ import argparse, json, os, re, shutil, subprocess, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SNIPPET = os.path.join(HERE, "..", "snippet", "heuristic.md")
-BEGIN = "<!-- BEGIN to-skill-or-not-to-skill -->"
-END = "<!-- END to-skill-or-not-to-skill -->"
+BEGIN = "<!-- BEGIN skill-genie -->"
+END = "<!-- END skill-genie -->"
+# Blocks written before the rename (2026-11-13) are found and replaced too.
+MARKER_NAMES = ("skill-genie", "to-skill-or-not-to-skill")
 
 # agent -> (config dir that proves it is installed, user-level instruction file)
 AGENTS = {
@@ -41,7 +43,8 @@ def in_git_tree(path):
 
 def apply(path, block, remove, dry):
     text = open(path).read() if os.path.exists(path) else ""
-    pat = re.compile(r"\n*" + re.escape(BEGIN) + r".*?" + re.escape(END) + r"\n?", re.S)
+    names = "|".join(re.escape(n) for n in MARKER_NAMES)
+    pat = re.compile(r"\n*<!-- BEGIN (?:" + names + r") -->.*?<!-- END (?:" + names + r") -->\n?", re.S)
     if remove:
         if not pat.search(text):
             return "absent"

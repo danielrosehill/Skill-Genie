@@ -1,6 +1,6 @@
 ---
 name: install-heuristic
-description: Install, update or remove the "to skill or not to skill" heuristic in the user-level instruction files of the user's AI coding agents (Claude Code, Codex, Gemini CLI, Qwen Code, opencode). User level only, never project level. Use when the user says "install the skill heuristic", "add skill-or-not to my CLAUDE.md", "propagate the heuristic to my agents", or "update the heuristic block".
+description: Install, update or remove the Skill Genie ("to skill or not to skill") heuristic in the user-level instruction files of the user's AI coding agents (Claude Code, Codex, Gemini CLI, Qwen Code, opencode). User level only, never project level. Use when the user says "install the skill heuristic", "add skill-or-not to my CLAUDE.md", "propagate the heuristic to my agents", or "update the heuristic block".
 ---
 
 # Install the heuristic at user level
@@ -13,7 +13,7 @@ Never put it in a project's `CLAUDE.md` or `AGENTS.md`.
 
 1. Find the plugin checkout. If `${CLAUDE_PLUGIN_ROOT}` is unset (for example, when
    the skill was read from a catalogue), clone
-   `https://github.com/danielrosehill/To-Skill-Or-Not-To-Skill` or use an existing
+   `https://github.com/danielrosehill/Skill-Genie` or use an existing
    local clone.
 2. Preview the change:
 
@@ -37,8 +37,8 @@ Never put it in a project's `CLAUDE.md` or `AGENTS.md`.
 | `--remove` | Remove the marked block |
 | `--dry-run` | Report without writing |
 
-The block sits between `<!-- BEGIN to-skill-or-not-to-skill -->` and
-`<!-- END to-skill-or-not-to-skill -->`. Running the script again replaces the block
+The block sits between `<!-- BEGIN skill-genie -->` and
+`<!-- END skill-genie -->` (blocks under the old `to-skill-or-not-to-skill` markers are replaced too). Running the script again replaces the block
 in place, so it is also the update path. Don't hand-edit inside the markers.
 
 If the user's instruction file is generated from a source (for example, a build

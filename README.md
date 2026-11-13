@@ -1,7 +1,10 @@
-# To Skill Or Not To Skill
+# Skill Genie
 
-A user-level heuristic for AI agents: before starting a task, ask whether it should
-become a skill.
+Proactive skill development that fits a live workflow. A user-level heuristic for AI
+agents: before starting a task, ask whether it should become a skill, and when the
+skill and the task are asked for together, do them in a sensible order.
+
+Formerly `To-Skill-Or-Not-To-Skill` (renamed 2026-11-13; the old GitHub URL redirects).
 
 Skills and plugins are defined patterns of work, and their value is cumulative. The
 current pace of AI development is chaotic partly because there is so much to define.
@@ -55,7 +58,7 @@ orders:
 When it can, the agent offers these as a menu with task-then-skill recommended.
 Otherwise it uses the default and says so.
 
-The same text is a habit in [Habits-Of-Claude](https://github.com/danielrosehill/Habits-Of-Claude/blob/main/habits/skill-or-not.md), which is its source. Use either one, not both.
+The same text is a habit in [Agent-Habits](https://github.com/danielrosehill/Agent-Habits/blob/main/library/habits/skill-or-not.md), which is its source. Use either one, not both.
 
 The exact text injected into instruction files is in
 [`snippet/heuristic.md`](snippet/heuristic.md). The step-by-step version is in
@@ -89,15 +92,15 @@ As a Claude Code plugin, from the `danielrosehill` marketplace:
 
 ```
 /plugin marketplace add danielrosehill/Claude-Code-Plugins
-/plugin install skill-or-not@danielrosehill
+/plugin install skill-genie@danielrosehill
 ```
 
 Then inject the snippet at user level. You can ask the agent to "install the skill
 heuristic", which runs the `install-heuristic` skill, or run the installer yourself:
 
 ```bash
-git clone https://github.com/danielrosehill/To-Skill-Or-Not-To-Skill
-cd To-Skill-Or-Not-To-Skill
+git clone https://github.com/danielrosehill/Skill-Genie
+cd Skill-Genie
 ./install.sh --dry-run        # preview: every agent whose config dir exists
 ./install.sh                  # write it
 ./install.sh --list           # known agents and their user-level files
@@ -114,7 +117,8 @@ cd To-Skill-Or-Not-To-Skill
 | opencode | `~/.config/opencode/AGENTS.md` |
 
 For any other agent, pass `--file PATH`. The block sits between
-`<!-- BEGIN to-skill-or-not-to-skill -->` markers. Re-running the installer replaces
+`<!-- BEGIN skill-genie -->` markers (blocks under the pre-rename
+`to-skill-or-not-to-skill` markers are replaced in place). Re-running the installer replaces
 the block in place, and the first write to an existing file leaves a `.bak-` copy.
 
 ## Hook or skill?
