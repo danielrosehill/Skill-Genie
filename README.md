@@ -13,10 +13,11 @@ recently, did not exist. Agents are now very good at writing skills and plugins
 themselves, so it costs little to ship the workflow you need. The leverage is in
 noticing that a task should be captured at all.
 
-This repo gives you that habit in three forms:
+This repo gives you that habit in four forms:
 
 - a **snippet** for the user-level instruction file of whatever agent you use
   (`CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, …), so the lens is always on;
+- a **skill**, `reindex`, that makes a newly written skill available at once;
 - a **skill**, `skill-or-not`, that runs the full checklist on demand ("I think this
   is replicable, run the checklist");
 - an **installer** that propagates the snippet into every agent you have.
@@ -48,15 +49,33 @@ orders:
 
 1. **Task, then skill (default).** Do the task, then write the skill from the
    experience, pitfalls included. The risk is forgetting the skill, so the agent
-   notes it up front and writes it before reporting the task as done.
-2. **Skill, then task.** Write the skill while the request is fresh, trigger a
-   re-index or sync immediately, then do the task, through the skill if it's
-   already available.
+   notes it up front and writes it before reporting the task as done, usually by
+   handing a full brief of the run to a background subagent, so the live work
+   carries on.
+2. **Skill, then task.** Write the skill while the request is fresh, force a
+   re-index straight away (skill `reindex`), then do the task through the skill.
 3. **Skill, task, update.** Draft the skill, run the task through it, then update
    the skill with the delta: pitfalls, wrong turns, steps that differed.
 
 When it can, the agent offers these as a menu with task-then-skill recommended.
 Otherwise it uses the default and says so.
+
+### Forcing a re-index: your own procedure
+
+How a new skill becomes available depends entirely on your setup: a skills folder, a
+marketplace plugin, or a searchable catalogue. The `reindex` skill carries generic
+steps for each, but reads your own procedure first from a private overlay outside the
+plugin:
+
+```
+$SKILL_GENIE_HOME/reindex.md                 # or
+$CLAUDE_USER_DATA/skill-genie/reindex.md     # or
+~/.claude-user-data/skill-genie/reindex.md
+```
+
+Put the exact commands for your setup there (push, sync, verify, load in session).
+Your deployment details stay out of this public repo. If the file is missing, the
+skill offers to write it once the generic steps have worked.
 
 The same text is a habit in [Agent-Habits](https://github.com/danielrosehill/Agent-Habits/blob/main/library/habits/skill-or-not.md), which is its source. Use either one, not both.
 

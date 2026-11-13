@@ -102,15 +102,40 @@ be seen again, such as a task-list item or a one-line note in your reply. Write 
 skill before you report the task as done, and include it in the final report.
 
 **B: re-index straight away.** A new skill is usually not available in the session
-that wrote it. Right after deploying it, trigger whatever makes it discoverable
-(catalogue sync, marketplace update, plugin reload). If it becomes available, run
-the task through it. If it doesn't, follow the written steps by hand and note any
-gap between the text and the run.
+that wrote it. Right after deploying it, run skill `skill-genie:reindex`. It follows
+the user's own procedure if they have saved one, verifies the skill is live, and
+loads it into the session where it can. Then run the task through the skill. If it
+can't be loaded yet, follow the written steps by hand and note any gap between the
+text and the run.
 
 **C: update with the delta.** After the task, compare the run with the draft. Add
 pitfalls, fix steps that were wrong or missing, and remove steps that turned out to
-be unnecessary. Redeploy. Report what changed ("skill updated: 2 pitfalls, 1 step
-reordered").
+be unnecessary. Redeploy and re-index. Report what changed ("skill updated: 2
+pitfalls, 1 step reordered").
+
+## Delegate the writing
+
+The live workflow is the user's priority, so keep the main thread on the task. Hand
+skill writing that comes after the task (the skill in A, the update in C) to a
+background subagent, when the environment has them:
+
+1. **Brief it fully.** The subagent sees only the brief. Include the task, the exact
+   steps that worked in order, commands and tool calls with their real arguments,
+   the pitfalls and wrong turns, where the skill goes (plugin, visibility), and the
+   draft's path for C. Strip anything personal if the destination is public.
+2. **Point it at the writing skill.** If a skill-capture skill is available (for
+   example `skill-this:skill-this` to write, `skill-this:improve-skill` to update),
+   tell the subagent to follow it. Otherwise give it the target plugin's
+   conventions.
+3. **Have it finish the job.** It saves, commits and pushes as the user's shipping
+   rules allow, then runs `skill-genie:reindex`.
+4. **Keep working, then check.** Carry on with the user's work. When the subagent
+   reports, check the result yourself: read the skill as served and confirm the
+   pitfalls made it in. Then name the skill in your report.
+
+Write it yourself instead when no subagents are available, when the user wants to
+review the skill before it ships, or for B, where the task waits on the skill
+anyway.
 
 ## Approval
 
@@ -126,5 +151,5 @@ Finish with a short verdict, for example:
 skill-or-not: step 5 → new skill `invoice-reconcile` in <private plugin>
 evidence: monthly pattern (3 prior sessions); the vendor API covers it
 order: A (task, then skill)
-first run: <task> completed; skill written from the run
+first run: <task> completed; skill written from the run by a subagent, reindexed
 ```
