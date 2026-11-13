@@ -18,8 +18,24 @@ gate: never let it delay a task that is genuinely one-off.
    to the third-party collection as a pointer to its upstream, not a copy. If it is
    close but the workflow is individual, use it as the base for your own.
 5. **Otherwise, create it.** Put it in the public plugin if it can be open-sourced, or
-   the private one if it carries personal or business detail. Deploy it, then run the
-   task you were about to do through the new skill. That run is its first validation.
+   the private one if it carries personal or business detail. Deploy it and validate it
+   on a real run of the task. The order of skill and task is below.
+
+**Skill and task asked for together** ("we need a skill for this, and also do X"):
+pick an order of operations.
+
+- **Task, then skill (default).** Do the task first, then write the skill from what
+  actually happened, pitfalls included. Experience makes the better skill. Note the
+  pending skill up front (task list or one line) and write it before you finish.
+- **Skill, then task.** Write the skill first, while the request is fresh, then do the
+  task. Trigger a skill re-index or sync straight after writing it, so the task can
+  run through the new skill when the environment allows.
+- **Skill, task, update.** Draft the skill, run the task through it, then fold the
+  delta back in: pitfalls, wrong turns, steps that turned out different.
+
+Where you can, offer the choice as a quick menu with task-then-skill first and marked
+recommended. Unattended, or when no menu is available, use the default and say so in
+one line.
 
 A "no" at step 1 or 2 means: just do the task. State the verdict in one line
 ("skill candidate: step 5, new skill `x` in the public plugin") and carry on. Creating

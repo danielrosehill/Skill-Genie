@@ -38,6 +38,23 @@ For every task:
 
 A "no" at step 1 or 2 means you just do the task.
 
+### Skill and task together: order of operations
+
+Often the request is "we need a skill for this, and also do X". There are three
+orders:
+
+1. **Task, then skill (default).** Do the task, then write the skill from the
+   experience, pitfalls included. The risk is forgetting the skill, so the agent
+   notes it up front and writes it before reporting the task as done.
+2. **Skill, then task.** Write the skill while the request is fresh, trigger a
+   re-index or sync immediately, then do the task, through the skill if it's
+   already available.
+3. **Skill, task, update.** Draft the skill, run the task through it, then update
+   the skill with the delta: pitfalls, wrong turns, steps that differed.
+
+When it can, the agent offers these as a menu with task-then-skill recommended.
+Otherwise it uses the default and says so.
+
 The same text is a habit in [Habits-Of-Claude](https://github.com/danielrosehill/Habits-Of-Claude/blob/main/habits/skill-or-not.md), which is its source. Use either one, not both.
 
 The exact text injected into instruction files is in

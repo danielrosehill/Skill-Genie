@@ -1,6 +1,6 @@
 ---
 name: skill-or-not
-description: Decide whether a task should become a reusable skill before doing it as a one-off. Runs the five-step checklist (repeatable? automatable? already in our library? already written by someone else? otherwise create it) and acts on the verdict. Use when the user says "should this be a skill", "is this a skill candidate", "run the skill checklist", "to skill or not to skill", or "I think this is replicable".
+description: Decide whether a task should become a reusable skill before doing it as a one-off. Runs the five-step checklist (repeatable? automatable? already in our library? already written by someone else? otherwise create it) and acts on the verdict. Use when the user says "should this be a skill", "is this a skill candidate", "run the skill checklist", "to skill or not to skill", "I think this is replicable", or "we need a skill for this, and also do X" (which also sets the order of skill and task).
 ---
 
 # To skill or not to skill
@@ -76,9 +76,41 @@ personal the workflow is:
    turns the procedure just followed into a `SKILL.md`), use it for the draft.
 3. **Deploy it** the way the user's plugins normally go live, for example push and
    index or sync. Then confirm the skill is actually discoverable.
-4. **Validate it on the real task.** Run the one-off task you were about to do
-   through the new skill. Fix whatever that run exposes before you call the skill
-   done.
+4. **Validate it on the real task.** Validate the skill against a real run of the
+   task you were about to do. Fix whatever that run exposes before you call the skill
+   done. Whether the skill or the task comes first is set by the order of operations
+   below.
+
+## Order of operations
+
+When the user asks for the skill and the task together ("we need a skill for this,
+but also do X"), choose one of three orders before you start.
+
+| Order | Sequence | When it fits |
+| --- | --- | --- |
+| **A. Task, then skill** (default) | Do the task, then write the skill from the run | Most cases. The skill records what actually happened, pitfalls included, not what you expected to happen. |
+| **B. Skill, then task** | Write the skill, re-index or sync it, then do the task | The procedure is already clear, or the context to capture is fresh and would be lost in a long task. |
+| **C. Skill, task, update** | Draft the skill, run the task through it, then fold the delta back in | Complex or high-value workflows. The run tests the draft, and the update records pitfalls, wrong turns and steps that turned out different. |
+
+**Asking.** If you have a way to ask (a multiple-choice question tool), offer the
+three orders as a menu before you start: A first and labelled recommended, then C,
+then B. Ask once, with no extra explanation. If you can't ask, or the run is
+unattended, use A and say so in one line ("order: task, then skill").
+
+**A: don't forget the skill.** At the start, record the pending skill where it will
+be seen again, such as a task-list item or a one-line note in your reply. Write the
+skill before you report the task as done, and include it in the final report.
+
+**B: re-index straight away.** A new skill is usually not available in the session
+that wrote it. Right after deploying it, trigger whatever makes it discoverable
+(catalogue sync, marketplace update, plugin reload). If it becomes available, run
+the task through it. If it doesn't, follow the written steps by hand and note any
+gap between the text and the run.
+
+**C: update with the delta.** After the task, compare the run with the draft. Add
+pitfalls, fix steps that were wrong or missing, and remove steps that turned out to
+be unnecessary. Redeploy. Report what changed ("skill updated: 2 pitfalls, 1 step
+reordered").
 
 ## Approval
 
@@ -93,5 +125,6 @@ Finish with a short verdict, for example:
 ```
 skill-or-not: step 5 → new skill `invoice-reconcile` in <private plugin>
 evidence: monthly pattern (3 prior sessions); the vendor API covers it
-first run: <task> completed through the skill
+order: A (task, then skill)
+first run: <task> completed; skill written from the run
 ```
