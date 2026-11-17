@@ -18,6 +18,7 @@ This repo gives you that habit in four forms:
 - a **snippet** for the user-level instruction file of whatever agent you use
   (`CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, …), so the lens is always on;
 - a **skill**, `reindex`, that makes a newly written skill available at once;
+- a **skill**, `go-out-then-in`, that takes private skills public as a generic plugin, then grafts your own details back on as a profile overlay (optional private procedure: `go-out-then-in.md` in the same data folder as `reindex.md`);
 - a **skill**, `skill-or-not`, that runs the full checklist on demand ("I think this
   is replicable, run the checklist");
 - an **installer** that propagates the snippet into every agent you have.

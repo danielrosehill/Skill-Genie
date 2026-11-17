@@ -1,7 +1,7 @@
 {
   "name": "skill-genie",
-  "version": "0.3.0",
-  "description": "Proactive skill development inside a live workflow. Before any task, ask: should this become a skill? A five-step checklist (repeatable, automatable, already ours, already someone else's, else create it), an order of operations for skill vs task (task first by default, writing delegated to a subagent), a reindex skill that makes a new skill available at once, plus an installer that puts the heuristic in your user-level CLAUDE.md / AGENTS.md.",
+  "version": "0.4.0",
+  "description": "Proactive skill development inside a live workflow. Before any task, ask: should this become a skill? A five-step checklist (repeatable, automatable, already ours, already someone else's, else create it), an order of operations for skill vs task (task first by default, writing delegated to a subagent), a reindex skill that makes a new skill available at once, a go-out-then-in skill that turns private skills into a public generic plugin and grafts the user's details back as an overlay, plus an installer that puts the heuristic in your user-level CLAUDE.md / AGENTS.md.",
   "author": {
     "name": "Daniel Rosehill",
     "email": "public@danielrosehill.com",
@@ -9,5 +9,13 @@
   },
   "repository": "https://github.com/danielrosehill/Skill-Genie",
   "license": "MIT",
-  "keywords": ["skills", "meta", "heuristic", "automation", "claude-md", "agents-md", "workflow-capture"]
+  "keywords": [
+    "skills",
+    "meta",
+    "heuristic",
+    "automation",
+    "claude-md",
+    "agents-md",
+    "workflow-capture"
+  ]
 }
