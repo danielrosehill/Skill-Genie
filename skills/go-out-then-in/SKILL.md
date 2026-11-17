@@ -38,7 +38,10 @@ delta (or is replaced by the overlay entirely).
 
 ## 2. Design the overlay before writing
 
-The public plugin must work for a stranger and for the user without edits. Give it:
+The public plugin must work for a stranger and for the user without edits. If the user
+follows the **Public Plugin, Private Overlay** standard (plugin `public-private-overlay`),
+its folder rules, secrets rule and "no parallel private fork" rule govern this step; its
+`audit-plugins` skill is the check afterwards. Give the plugin:
 
 - A **profile/overlay format** documented in the plugin (`references/profile.md` or
   similar): every value the skills need that is personal (identity, tool/server name,
