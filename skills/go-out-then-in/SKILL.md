@@ -61,6 +61,14 @@ Routes to the user's other private tools go in the overlay as plain text ("skill
 ## 3. Write it out
 
 - New repo, public, named at maximum specificity, MIT unless the user says otherwise.
+- **History tripwire: never make an existing private repo public without checking its
+  history.** Flipping visibility (or reusing a private repo, including an empty-looking
+  placeholder) publishes every past commit, not just the current tree. Run the leak check
+  below over the whole history (`git log -p --all`, plus commit messages and author
+  emails), not just the working tree. Clean (or zero commits): flipping it is fine. Any
+  private detail or PII in history: don't rewrite history. Create a fresh public repo with
+  clean content, delete the private one (confirm with the user first; it's deletion), then
+  bring the public one back in as usual. Same if the private repo has forks or old releases.
 - Rewrite rather than copy-and-scrub: copied text drags personal examples along. Use
   neutral examples (`Alex`, `Acme Hardware`, `15551234567`).
 - Keep dated validation notes ("verified 2026-11-17 on version X"), minus personal ids.
